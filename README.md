@@ -1,13 +1,12 @@
-# Sample Hardhat Project
+# Allowance-Automation
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project exposes a couple of API's that allow the user to input any address and get the list of addresses and their allowances that the given address has approved them to spend.
 
-Try running some of the following tasks:
+The two API's are:
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+1. getAllowance()
+2. UpdateAllowance()
+
+## getAllowance
+
+## UpdateAllowance
