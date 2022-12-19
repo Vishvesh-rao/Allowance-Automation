@@ -1,7 +1,7 @@
 import  Web3 from "web3";
 import express from "express";
-import ContractABI from "./assets/ContractABI.json";
-import { TOKEN_CONTRACT_ADDRESS, RPC_URl, START_BLOCK, END_BLOCK, PORT } from "./config/config.js";
+import ContractABI from "../assets/ContractABI.json";
+import { TOKEN_CONTRACT_ADDRESS, RPC_URl, START_BLOCK, END_BLOCK, PORT } from "../config/config.js";
  
 const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URl));
 const contract = new web3.eth.Contract(ContractABI,TOKEN_CONTRACT_ADDRESS);
@@ -45,14 +45,10 @@ async function UpdateAllowance(){
         allowanceAddresses.push((Result[i][0]));
         }
     }
-    console.log("Allowances")
-    console.log(allowanceAddresses);
     var aa = new Set(allowanceAddresses);
 
     for(let item of aa) {
         if(item) {
-            console.log(item)
-
             txObj = await createTxObject(item);
             signAndSend(txObj);
         } 
@@ -62,7 +58,6 @@ async function UpdateAllowance(){
 // create the transaction object
 async function createTxObject(toAddress){
 
-    console.log('welcome')
     const nonce = await web3.eth.getTransactionCount(address, 'pending');
     const extraData = await contract.methods.approve(toAddress, 0);
     const data = extraData.encodeABI();
@@ -82,13 +77,11 @@ async function createTxObject(toAddress){
 // sign and send the transaction
 async function signAndSend(txObj){
     const signPromise = web3.eth.accounts.signTransaction(txObj,adminPvtKey);
-    console.log("step1");
     signPromise.then((signedTx) => {
      
         const sentTx = web3.eth.sendSignedTransaction(signedTx.raw || signedTx.rawTransaction);
-        console.log("step 2")
         sentTx.on("receipt", receipt => {
-            console.log("Transaction sucessfull.\nTid: ");
+            console.log("Transaction sucessfull.");
         });
         sentTx.on("error", err => {
             console.log(err.message);
