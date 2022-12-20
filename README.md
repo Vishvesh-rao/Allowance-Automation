@@ -38,5 +38,5 @@ To optimize the search range according to the required use case refer the `confi
 
 To specify or change the current erc20 contract make the changes in config.js and the assests folder.
 
-- Specify the address of the ERC20 contract in `config.js`
+- Specify the address of the ERC20 contract in `TOKEN_CONTRACT_ADDRESS` variable in `config.js`
 - put the contracts ABI in assests/ContractABI.json file
