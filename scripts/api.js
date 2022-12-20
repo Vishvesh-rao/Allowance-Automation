@@ -13,6 +13,7 @@ let address = '';
 let Result = [];
 
 // get allowances of all approved addresses for a given address
+// eg address for testing: 0x415198d909d35b4bCe2f2de87EDaDa39720A5A68
 async function AllowanceApi(address) {
 
     let eventlist = [];
