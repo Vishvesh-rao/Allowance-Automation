@@ -1,7 +1,7 @@
 import  Web3 from "web3";
 import express from "express";
 import ContractABI from "../assets/ContractABI.json";
-import { TOKEN_CONTRACT_ADDRESS, RPC_URl, START_BLOCK, END_BLOCK, PORT } from "../config/config.js";
+import { TOKEN_CONTRACT_ADDRESS, RPC_URl, START_BLOCK_OFFSET, END_BLOCK_OFFSET, ITERATIONS, PORT } from "../config/config.js";
  
 const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URl));
 const contract = new web3.eth.Contract(ContractABI,TOKEN_CONTRACT_ADDRESS);
@@ -13,21 +13,27 @@ let address = '';
 let Result = [];
 
 // get allowances of all approved addresses for a given address
-async function getAllowance() {
-    var eventlist = [];
-    var result = {};
+async function AllowanceApi(address) {
 
-    let events = await contract.getPastEvents("Approval",
-        {   filter: {owner:address},                   
-            fromBlock: START_BLOCK,     
-            toBlock: END_BLOCK          
-        }).catch((error) => {
-            console.error(error);
-        });
+    let eventlist = [];
+    let result = {};
+    var start = START_BLOCK_OFFSET;
+    var end = END_BLOCK_OFFSET;
     
-    for (var i = 0, l = events.length; i < l; i++) 
-    {
-        eventlist[i] = [result['spender'] = events[i]['returnValues']['spender'],result['value'] = events[i]['returnValues']['value']];
+    for (var j = 0, l = ITERATIONS; j<l; j++ ){
+        let events = await contract.getPastEvents("Approval",
+            {   filter: {owner:address},                   
+                fromBlock: start,     
+                toBlock: end          
+            })
+        
+        for (var i = 0, l = events.length; i < l; i++) 
+        {
+            eventlist.push([result['spender'] = events[i]['returnValues']['spender'],result['value'] = events[i]['returnValues']['value']]);
+        }
+
+        start = start - 3000;
+        end = end - 3000
     }
 
     return eventlist;
