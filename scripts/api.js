@@ -88,13 +88,13 @@ async function signAndSend(txObj){
      
         const sentTx = web3.eth.sendSignedTransaction(signedTx.raw || signedTx.rawTransaction);
         sentTx.on("receipt", receipt => {
-            console.log("Transaction sucessfull.");
+            document.write("Transaction sucessfull.");
         });
         sentTx.on("error", err => {
-            console.log(err.message);
+            document.write(err.message);
         });
       }).catch((err) => {
-        console.log(err);
+        document.write(err);
       });
 }
 
@@ -103,7 +103,7 @@ async function signAndSend(txObj){
 app.get('/getAllowances/:address', async (req, res) => {
     address = req.params.address;
     Result = await getAllowance();
-    console.log(Result)
+    document.write(Result)
 })
 
 // updateAllowances API
