@@ -33,3 +33,10 @@ To optimize the search range according to the required use case refer the `confi
 - Modify the `ITERATIONS` value to increase/decrease the search range.
 
 > The maximum range of search in one iteration is 3000 blocks
+
+### Specifying ERC20 Contract
+
+To specify or change the current erc20 contract make the changes in config.js and the assests folder.
+
+- Specify the address of the ERC20 contract in `config.js`
+- put the contracts ABI in assests/ContractABI.json file
