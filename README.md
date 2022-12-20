@@ -23,7 +23,7 @@ node scripts/api.js
 
 if that doesent work
 ```bash
-node node --experimental-json-modules scripts/api.js
+node --experimental-json-modules scripts/api.js
 ```
 ### Optimising the range
 
