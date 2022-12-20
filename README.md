@@ -25,3 +25,8 @@ if that doesent work
 ```bash
 node node --experimental-json-modules scripts/api.js
 ```
+### Optimising the range
+
+To optimize the search range according to the required use case refer the `config.js` file
+change the block offset values to specify the start of the search.
+Modify the ITERATIONS value to increase/decrease the search range.
