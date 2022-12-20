@@ -27,6 +27,9 @@ node node --experimental-json-modules scripts/api.js
 ```
 ### Optimising the range
 
-To optimize the search range according to the required use case refer the `config.js` file
-change the block offset values to specify the start of the search.
-Modify the ITERATIONS value to increase/decrease the search range.
+To optimize the search range according to the required use case refer the `config.js` file.
+
+- change the block offset (`START_BLOCK` and `END_BLOCK`) values to specify the start of the search.
+- Modify the `ITERATIONS` value to increase/decrease the search range.
+
+> The maximum range of search in one iteration is 3000 blocks
